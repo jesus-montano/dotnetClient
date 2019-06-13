@@ -18,10 +18,10 @@ namespace myApp
                 client.BaseAddress =new Uri("https://jsonplaceholder.typicode.com/");
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("aplicatiion/json"));
-                //GetById(client, "1").Wait();
-                //postComment(client, new Comment() {name = "asdgfs", email = "test@test.com", body ="dgadfgshfgnsvrgsbfdd"}).Wait();
-                //GetAll(client).Wait();
-
+                GetById(client, "1").Wait();
+                postComment(client, new Comment() {name = "asdgfs", email = "test@test.com", body ="dgadfgshfgnsvrgsbfdd"}).Wait();
+                updateComment(client, "1", new Comment() {name = "asdgfs", email = "test@test.com", body ="dgadfgshfgnsvrgsbfdd"}).Wait();
+                 GetAll(client).Wait();
 
             }
         }
@@ -66,6 +66,21 @@ namespace myApp
 
                 Comment comments = await response.Content.ReadAsAsync<Comment>();
                 Console.WriteLine("saved");
+
+            }
+            catch(HttpRequestException e){
+                Console.WriteLine("{0}", e.Message);
+            }
+        }
+
+        static async Task updateComment(HttpClient client, string id, Comment comment){
+            //put Comment
+            try{
+                HttpResponseMessage response = await client.PutAsJsonAsync("comments/"+ id, comment);
+                response.EnsureSuccessStatusCode();
+
+                Comment comments = await response.Content.ReadAsAsync<Comment>();
+                Console.WriteLine("updated");
 
             }
             catch(HttpRequestException e){
