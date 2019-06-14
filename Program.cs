@@ -13,7 +13,7 @@ namespace myApp
         static async Task runClient(){
             Client client = new Client();
                int option = 0;
-               
+               Comment comment;
 
                while(option < 5){
                 Console.WriteLine("Select an option:\n 1 Get all\n 2 GetById\n 3 Create new Comment\n 4 Update Comment\n 5 exit");
@@ -28,14 +28,16 @@ namespace myApp
                         }
                         break;
                     case 2:
-                        Comment comment = await client.GetById(GetId());
+                        comment = await client.GetById(GetId());
                         Console.WriteLine("name: {0}\nemail: {1}\nbody: {2}", comment.name, comment.email, comment.body);
                         break;
                     case 3:
-                        await client.postComment(GetComment());
+                       comment = await client.postComment(GetComment());
+                       Console.WriteLine("name: {0}\nemail: {1}\nbody: {2}", comment.name, comment.email, comment.body);
                         break;
                     case 4:
-                       await client.updateComment(GetId(), GetComment());
+                       comment = await client.updateComment(GetId(), GetComment());
+                       Console.WriteLine("name: {0}\nemail: {1}\nbody: {2}", comment.name, comment.email, comment.body);
                         break;        
                     default:
                         Console.WriteLine("Default case");
@@ -68,6 +70,7 @@ namespace myApp
             string id;
             Console.WriteLine("Write id");
             id = Console.ReadLine();
+
             return id;
         }
         
