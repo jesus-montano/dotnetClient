@@ -21,7 +21,6 @@ namespace myApp
 
                 Comment comment = await response.Content.ReadAsAsync<Comment>();
 
-                //Console.WriteLine("name: {0}\nemail: {1}\nbody: {2}", comment.name, comment.email, comment.body);
                 return comment;
 
             }
@@ -39,9 +38,6 @@ namespace myApp
 
                 List<Comment> comments = await response.Content.ReadAsAsync<List<Comment>>();
 
-                foreach(Comment comment in comments){
-                    Console.WriteLine("name: {0}\nemail: {1}\nbody: {2}", comment.name, comment.email, comment.body);
-                }
                 return comments;
             }
             catch(HttpRequestException e){
