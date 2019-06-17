@@ -11,9 +11,10 @@ namespace myApp
            await runClient();
         }
         static async Task runClient(){
+            Comment comment;
             Client client = new Client();
-               int option = 0;
-               Comment comment;
+            int option = 0;
+               
 
                while(option < 5){
                 Console.WriteLine("Select an option:\n 1 Get all\n 2 GetById\n 3 Create new Comment\n 4 Update Comment\n 5 exit");
